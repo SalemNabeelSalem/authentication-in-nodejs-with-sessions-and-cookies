@@ -6,6 +6,7 @@ const mongodbStore = require("connect-mongodb-session")(session);
 const connectDB = require("./config/db");
 
 const appController = require("./controllers/AppController");
+const isAuth = require("./middleware/IsAuth");
 
 const MONGO_DB_URL = config.get("MONGO_DB_URL");
 const SERVER_PORT = config.get("SERVER_PORT");
@@ -88,7 +89,7 @@ app.post("/login", appController.login_post);
 /**
  * @description: Dashboard Page.
  */
-app.get("/dashboard", appController.dashboard_get);
+app.get("/dashboard", isAuth, appController.dashboard_get);
 
 /**
  * @description: Logout Page.

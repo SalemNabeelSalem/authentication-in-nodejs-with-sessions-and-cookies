@@ -104,6 +104,6 @@ exports.logout_post = (req, res) => {
       throw error;
     }
 
-    res.redirect("/login");
+    res.redirect("/");
   });
 };
