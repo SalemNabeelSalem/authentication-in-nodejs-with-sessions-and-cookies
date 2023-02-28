@@ -1,7 +1,7 @@
 const config = require("config");
 const mongoose = require("mongoose");
 
-const MONGO_DB_URL = config.get("MONGO_DB_URL");
+const MONGO_DB_URI = config.get("MONGO_DB_URI");
 
 /**
  * @description: disable strict query.
@@ -13,7 +13,7 @@ mongoose.set("strictQuery", false);
  */
 const connectDB = async () => {
   try {
-    mongoose.connect(MONGO_DB_URL, {
+    mongoose.connect(MONGO_DB_URI, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     });

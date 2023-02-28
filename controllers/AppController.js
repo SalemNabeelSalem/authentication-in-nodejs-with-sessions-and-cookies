@@ -13,10 +13,13 @@ exports.landing_page = (req, res) => {
  * @description: Register Page.
  */
 exports.register_get = (req, res) => {
+  // get the error message from session and pass to the view.
   const error = req.session.error;
 
+  // delete the error message after rendering the page.
   delete req.session.error;
 
+  // render the page with error message.
   res.render("register", { error: error });
 };
 
@@ -49,10 +52,13 @@ exports.register_post = async (req, res) => {
  * @description: Login Page.
  */
 exports.login_get = (req, res) => {
+  // get the error message from session and pass to the view.
   const error = req.session.error;
 
+  // delete the error message after rendering the page.
   delete req.session.error;
 
+  // render the page with error message.
   res.render("login", { error: error });
 };
 
@@ -79,6 +85,8 @@ exports.login_post = async (req, res) => {
 
   req.session.username = user.username;
 
+  req.session.email = user.email;
+
   res.redirect("/dashboard");
 };
 
@@ -87,12 +95,13 @@ exports.login_post = async (req, res) => {
  */
 exports.dashboard_get = (req, res) => {
   const username = req.session.username;
+  const email = req.session.email;
 
   if (!req.session.isAuth) {
     return res.redirect("/login");
   }
 
-  res.render("dashboard", { username: username });
+  res.render("dashboard", { username: username, email: email });
 };
 
 /**

@@ -8,7 +8,7 @@ const connectDB = require("./config/db");
 const appController = require("./controllers/AppController");
 const isAuth = require("./middleware/IsAuth");
 
-const MONGO_DB_URL = config.get("MONGO_DB_URL");
+const MONGO_DB_URI = config.get("MONGO_DB_URI");
 const SERVER_PORT = config.get("SERVER_PORT");
 
 const app = express();
@@ -19,7 +19,7 @@ connectDB();
  * @description: session store.
  */
 const store = new mongodbStore({
-  uri: MONGO_DB_URL,
+  uri: MONGO_DB_URI,
   collection: "sessions",
 });
 
@@ -54,20 +54,19 @@ app.listen(SERVER_PORT, () => {
   console.log(`Server is Running on Port ${SERVER_PORT}`);
 });
 
-/**
-app.get("/", (req, res) => {
-  req.session.isAuth = true;
+app.get("/test", (req, res) => {
+  // req.session.isAuth = true;
 
-  console.log(req.session);
+  // console.log(req.session);
 
-  console.log(`session id: ${req.session.id}`);
+  // console.log(`session id: ${req.session.id}`);
 
   res.status(200).send({
     status: "success",
     message: "server is running",
+    session: req.session,
   });
 });
- */
 
 /**
  * @description: Landing Page.
